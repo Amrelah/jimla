@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jimla/components/home_page/search_textfield.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:jimla/data/screen_data.dart';
 import 'package:jimla/path/path_provider.dart';
 import 'package:jimla/screens/detail.dart';
@@ -37,79 +38,83 @@ class _HomeState extends State<Home> {
               ),
               Expanded(
                 flex: 3,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Container(
-                        width: w-60,
-                        height: double.infinity,
-                        margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                        padding: const EdgeInsets.only(top: 30.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
+                child: CardSwiper(
+                  cardsCount: 20,
+                  cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Detail(),));
+                    },
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: w-60,
+                          height: double.infinity,
+                          margin: const EdgeInsets.symmetric(horizontal: 30.0),
+                          padding: const EdgeInsets.only(top: 30.0),
                           decoration: BoxDecoration(
+                            color: Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.green,
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.black87,
-                                  blurRadius: 5,
-                                  offset: Offset(2, 4)
-                              )
-                            ]
                           ),
                           child: Container(
-                              margin: EdgeInsets.only(right: w*0.4),
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('New Arrival',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  const Text('#Electronics',
-                                    style: TextStyle(
-                                      color: Colors.yellow,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400
-                                    ),
-                                  ),
-                                  Center(
-                                    child: ElevatedButton(
-                                      onPressed: (){},
-                                      child: const Text("Get it", style: TextStyle(color: Colors.green),)),
-                                  )
-                                ],
-                              )),
-                        ),
-                      ),
-                      SizedBox(
-                        width: w-60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-                              child: Image.asset(Images.drawer),
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.green,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.black87,
+                                    blurRadius: 5,
+                                    offset: Offset(2, 4)
+                                )
+                              ]
                             ),
-                          ],
+                            child: Container(
+                                margin: EdgeInsets.only(right: w*0.4),
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('New Arrival',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    const Text('#Electronics',
+                                      style: TextStyle(
+                                        color: Colors.yellow,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400
+                                      ),
+                                    ),
+                                    Center(
+                                      child: ElevatedButton(
+                                        onPressed: (){},
+                                        child: const Text("Get it", style: TextStyle(color: Colors.green),)),
+                                    )
+                                  ],
+                                )),
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width: w-60,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0, bottom: 10),
+                                child: Image.asset(Images.drawer),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
-                itemCount: 50,
                 )),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -132,7 +137,7 @@ class _HomeState extends State<Home> {
               ),
               SizedBox(
                 width: w,
-                height: 30,
+                height: 60,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ListView.separated(
@@ -155,13 +160,20 @@ class _HomeState extends State<Home> {
                                 width: 1
                               ),
                             ),
-                            child: Center(
-                                child: Text('Cat ${index + 1}',
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Cat ${index + 1}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: selectedCategory == index ? Colors.white : Colors.black,
                                   ),
-                                )),
+                                ),
+                                Icon(Icons.emoji_food_beverage,
+                                    color: selectedCategory == index ? Colors.white : Colors.black,
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -195,14 +207,18 @@ class _HomeState extends State<Home> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.circular(20)
-                              ),
-                                child: Image.asset(Images.drawer,width: w*0.25,height: w*0.3,)),
+                            Material(
+                              elevation: 10,
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                  child: Image.asset(Images.drawer,width: w*0.25,height: w*0.3,)),
+                            ),
                             ListTile(
                               dense: true,
                               contentPadding: const EdgeInsets.symmetric(horizontal: 5,vertical: 0),

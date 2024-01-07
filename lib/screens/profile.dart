@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jimla/path/path_provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -10,6 +10,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final controller = WebViewController()
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..loadRequest(Uri.parse('https://flutter.dev'));
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -22,9 +25,9 @@ class _ProfileState extends State<Profile> {
       body: SingleChildScrollView(
         child: SizedBox(
           height: h,
-          child: const Column(
+          child: Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 52,
                 backgroundColor: Colors.green,
                 child: CircleAvatar(
@@ -32,18 +35,24 @@ class _ProfileState extends State<Profile> {
                   child: SizedBox(),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(CupertinoIcons.person_circle, color: Colors.green,),
                 title: Text('Fname Lname'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(CupertinoIcons.phone_fill, color: Colors.green,),
                 title: Text('+251 928 667 400'),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(CupertinoIcons.location_solid, color: Colors.red,),
                 title: Text('Addis Ababa, Jemo1'),
               ),
+              Container(
+                width: w,
+                height: 500,
+                child: WebViewWidget(
+                    controller: controller),
+              )
             ],
           ),
         ),
