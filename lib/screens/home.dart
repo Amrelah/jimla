@@ -5,6 +5,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:jimla/data/screen_data.dart';
 import 'package:jimla/path/path_provider.dart';
 import 'package:jimla/screens/detail.dart';
+import 'package:badges/badges.dart' as badges;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -236,24 +237,6 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ),
-                            // const Padding(
-                            //   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //     children: [
-                            //       Text('Product name',),
-                            //       Icon(Icons.add_shopping_cart,color: Colors.green,)
-                            //     ],
-                            //   ),
-                            // ),
-                            // const Padding(
-                            //   padding: EdgeInsets.only(left: 10.0),
-                            //   child: Text('1234.00 Br',
-                            //     style: TextStyle(
-                            //       fontWeight: FontWeight.w700
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       );
@@ -273,12 +256,20 @@ class _HomeState extends State<Home> {
               ind != 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) => screens[ind]['name'],)) : null;
             });
           },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-            BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Order History'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          items: [
+            const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
+            BottomNavigationBarItem(icon: badges.Badge(
+                position: badges.BadgePosition.topEnd(
+                    top: -15, end: -20),
+                badgeStyle: const badges.BadgeStyle(
+                    badgeColor: Colors.green),
+                badgeContent: const Text('10',style: TextStyle(
+                  color: Colors.white
+                ),),
+                child: const Icon(Icons.shopping_cart)), label: 'Cart'),
+            const BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Order History'),
+            const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ]),
     );
   }

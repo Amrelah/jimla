@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:jimla/provider/product.dart';
 import 'package:jimla/screens/login.dart';
@@ -5,11 +6,15 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => ProductProvider())
-        ],
-        child: const MyApp(),
+    DevicePreview(
+      builder: (context) {
+        return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => ProductProvider())
+            ],
+            child: const MyApp(),
+        );
+      }
     )
   );
 }
@@ -22,6 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Jimla',
       debugShowCheckedModeBanner: false,
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

@@ -22,37 +22,23 @@ class _HistoryState extends State<History> {
           title: const Text('Order History'),
           centerTitle: true,
           bottom: const TabBar(
+            isScrollable: true,
+              padding: EdgeInsets.only(left: 0),
               tabs: [
                 Tab(
-                  icon: Column(
-                    children: [
-                      Icon(CupertinoIcons.check_mark_circled, color: Colors.green,),
-                      Text('Delivered')
-                    ],
-                  ),
+                  icon: Icon(CupertinoIcons.check_mark_circled, color: Colors.green,),
+                  child: Text('Delivered(100)'),
                 ),
                 Tab(
-                  icon: Column(
-                    children: [
-                      Icon(Icons.delivery_dining, color: Colors.deepOrange,),
-                      Text('Pending')
-                    ],
-                  ),
+                  icon: Icon(Icons.delivery_dining, color: Colors.deepOrange,),
+                  child: Text('Pending(10)'),
                 ),
                 Tab(
-                  icon: Column(
-                    children: [
-                      Icon(CupertinoIcons.timer, color: Colors.purple,),
-                      Text('Scheduled')
-                    ],
-                  ),
+                  icon: Icon(CupertinoIcons.timer, color: Colors.purple,),
+                  child: Text('Scheduled(5)'),
                 ),Tab(
-                  icon: Column(
-                    children: [
-                      Icon(CupertinoIcons.clear_circled, color: Colors.pink,),
-                      Text('Cancelled')
-                    ],
-                  ),
+                  icon: Icon(CupertinoIcons.clear_circled, color: Colors.pink,),
+                  child: Text('Cancelled(4)'),
                 ),
               ]),
         ),

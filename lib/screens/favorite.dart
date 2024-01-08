@@ -20,31 +20,35 @@ class _FavoriteState extends State<Favorite> {
         title: const Text('Favorite'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            return Material(
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Material(
               elevation: 10,
+              borderRadius: BorderRadius.circular(20),
               child: Row(
                 children: [
-                  Material(
-                    borderRadius: BorderRadius.circular(20),
-                    elevation: 10,
-                    child: Container(
-                        padding: const EdgeInsets.all(10),
-                        width: w*0.3,
-                        height: w*0.3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        child: Image.asset(Images.drawer,)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      elevation: 10,
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          width: w*0.3,
+                          height: w*0.3,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                          child: Image.asset(Images.drawer,)),
+                    ),
                   ),
                   Column(
                     children: [
                       SizedBox(
-                        width: w*0.7-25,
+                        width: (w*0.7)-40,
                         child: ListTile(
                           contentPadding: const EdgeInsets.only(right: 5,left: 16),
                           title: Text('Product Name ${index+1}'),
@@ -61,7 +65,7 @@ class _FavoriteState extends State<Favorite> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        width: w*0.7-25,
+                        width: w*0.7-40,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -80,11 +84,10 @@ class _FavoriteState extends State<Favorite> {
                   ),
                 ],
               ),
-            );
-          }, separatorBuilder: (BuildContext context, int index) {
-          return Divider(height: 20,thickness: 3,endIndent: 25,color: Colors.green.shade200,);
-        }, itemCount: 30,),
-      ),
+            ),
+          );
+        },
+        itemCount: 30,),
     );
   }
 }
