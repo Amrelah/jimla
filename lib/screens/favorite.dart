@@ -42,7 +42,7 @@ class _FavoriteState extends State<Favorite> {
                               color: Colors.white,
                             borderRadius: BorderRadius.circular(20)
                           ),
-                          child: Image.asset(Images.drawer,)),
+                          child: Image.asset(Images.sunflowerP,)),
                     ),
                   ),
                   Column(

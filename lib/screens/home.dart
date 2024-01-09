@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/home_page/search_textfield.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:jimla/data/screen_data.dart';
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 2,
         title: const Text('ጅምላ|Jimla'),
+        toolbarHeight: kToolbarHeight.sp,
       ),
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -41,6 +43,7 @@ class _HomeState extends State<Home> {
                 flex: 3,
                 child: CardSwiper(
                   cardsCount: 20,
+                  backCardOffset: Offset(0.sp, 30.sp),
                   cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
                   return GestureDetector(
                     onTap: (){
@@ -51,16 +54,16 @@ class _HomeState extends State<Home> {
                         Container(
                           width: w-60,
                           height: double.infinity,
-                          margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                          padding: const EdgeInsets.only(top: 30.0),
+                          margin: EdgeInsets.symmetric(horizontal: 30.0.sp),
+                          padding: EdgeInsets.only(top: 30.0.sp),
                           decoration: BoxDecoration(
                             color: Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Container(
-                            margin: const EdgeInsets.all(10),
+                            margin: EdgeInsets.all(8.sp),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                               color: Colors.green,
                               boxShadow: const [
                                 BoxShadow(
@@ -77,25 +80,25 @@ class _HomeState extends State<Home> {
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('New Arrival',
+                                    Text('New Arrival',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 25,
+                                        fontSize: 25.sp,
                                         fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    const Text('#Electronics',
+                                    Text('#Electronics',
                                       style: TextStyle(
                                         color: Colors.yellow,
-                                        fontSize: 18,
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.w400
                                       ),
                                     ),
-                                    Center(
-                                      child: ElevatedButton(
-                                        onPressed: (){},
-                                        child: const Text("Get it", style: TextStyle(color: Colors.green),)),
-                                    )
+                                    // Center(
+                                    //   child: ElevatedButton(
+                                    //     onPressed: (){},
+                                    //     child: Text("Get it", style: TextStyle(color: Colors.green,fontSize: 14.sp),)),
+                                    // )
                                   ],
                                 )),
                           ),
@@ -107,7 +110,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-                                child: Image.asset(Images.drawer),
+                                child: Image.asset(Images.sunflowerP),
                               ),
                             ],
                           ),
@@ -117,20 +120,20 @@ class _HomeState extends State<Home> {
                   );
                 },
                 )),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Categories',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 25.sp,
                         fontWeight: FontWeight.w600
                       ),),
                     Text('See all',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 18
+                        fontSize: 18.sp
                       ),
                     )
                   ],
@@ -138,7 +141,7 @@ class _HomeState extends State<Home> {
               ),
               SizedBox(
                 width: w,
-                height: 60,
+                height: 64.sp,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ListView.separated(
@@ -167,6 +170,7 @@ class _HomeState extends State<Home> {
                                 Text('Cat ${index + 1}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
+                                    fontSize: 14.sp,
                                     color: selectedCategory == index ? Colors.white : Colors.black,
                                   ),
                                 ),
@@ -185,7 +189,7 @@ class _HomeState extends State<Home> {
                   },)
                 ),
               ),
-              const SizedBox(height: 20,),
+              SizedBox(height: 10.sp,),
               Expanded(
                 flex: 8,
                 child: Container(
@@ -194,7 +198,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: w/(h*0.55),
+                        childAspectRatio: (w/(h*0.45)).sp,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 0
                     ),
@@ -218,21 +222,30 @@ class _HomeState extends State<Home> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                  child: Image.asset(Images.drawer,width: w*0.25,height: w*0.3,)),
+                                  child: Image.asset(Images.sunflowerP,width: w*0.25,height: w*0.3,)),
                             ),
                             ListTile(
                               dense: true,
                               contentPadding: const EdgeInsets.symmetric(horizontal: 5,vertical: 0),
-                              title: Text('Product Name ${index+1}',overflow: TextOverflow.ellipsis,),
-                              subtitle: const Text('1234.00 Br',
+                              title: Text('Product Name ${index+1}',overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w700
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              subtitle: Text('1234.00 Br',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 15.sp
                                 ),),
                               trailing: Column(
                                 children: [
                                   IconButton(
                                       onPressed: (){},
-                                      icon: const Icon(CupertinoIcons.cart_badge_plus,color: Colors.green,)),
+                                      style: const ButtonStyle(
+                                        backgroundColor: MaterialStatePropertyAll(Colors.green),
+                                      ),
+                                      icon: Icon(CupertinoIcons.cart_badge_plus,color: Colors.white,size: 30.sp,)),
                                   const Expanded(child: SizedBox())
                                 ],
                               ),
@@ -261,11 +274,12 @@ class _HomeState extends State<Home> {
             const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
             BottomNavigationBarItem(icon: badges.Badge(
                 position: badges.BadgePosition.topEnd(
-                    top: -15, end: -20),
+                    top: -15.sp, end: -20.sp),
                 badgeStyle: const badges.BadgeStyle(
                     badgeColor: Colors.green),
-                badgeContent: const Text('10',style: TextStyle(
-                  color: Colors.white
+                badgeContent: Text('10',style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp
                 ),),
                 child: const Icon(Icons.shopping_cart)), label: 'Cart'),
             const BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Order History'),
