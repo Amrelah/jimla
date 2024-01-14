@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/toast/date_picker_modal.dart';
 import 'package:jimla/toast/toast.dart';
 import 'package:motion_toast/motion_toast.dart';
@@ -82,48 +83,56 @@ class _CartState extends State<Cart> {
                                   ),
                                 ),
                                 Row(
-                                  children: [IconButton(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(EdgeInsets.all(2)),
-                                        backgroundColor: MaterialStatePropertyAll(CupertinoColors.activeGreen),
-                                      ),
-                                      onPressed: (){
+                                  children: [
+                                    GestureDetector(
+                                      onTap: (){
                                         setState(() {
                                           count--;
                                         });
                                       },
-                                      icon: const Icon(CupertinoIcons.minus,color: Colors.white,)),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5.sp),
+                                          decoration: BoxDecoration(
+                                              color: CupertinoColors.activeGreen,
+                                              borderRadius: BorderRadius.circular(100)
+                                          ),
+                                          child: Icon(CupertinoIcons.minus,color: Colors.white,size: 30.sp,)),
+                                    ),
                                     NumberPicker(
                                         minValue: 1,
                                         maxValue: 100,
                                         value: count,
-                                        itemWidth: 40,
-                                        itemHeight: 30,
-                                        textStyle: const TextStyle(
+                                        itemWidth: 50.sp,
+                                        itemHeight: 40.sp,
+                                        textStyle: TextStyle(
                                           color: Colors.black45,
-                                          fontSize: 10
+                                          fontSize: 15.sp
                                         ),
-                                        selectedTextStyle: const TextStyle(
+                                        selectedTextStyle: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w900,
-                                          fontSize: 20
+                                          fontSize: 25.sp
                                         ),
                                         onChanged: (val){
                                           setState(() {
                                             count = val;
                                           });
                                         }),
-                                    IconButton(
-                                        style: const ButtonStyle(
-                                          padding: MaterialStatePropertyAll(EdgeInsets.all(2)),
-                                          backgroundColor: MaterialStatePropertyAll(CupertinoColors.activeGreen),
-                                        ),
-                                        onPressed: (){
-                                          setState(() {
-                                            count++;
-                                          });
-                                        },
-                                        icon: const Icon(CupertinoIcons.plus,color: Colors.white,)),],
+                                    GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          count++;
+                                        });
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.all(5.sp),
+                                          decoration: BoxDecoration(
+                                              color: CupertinoColors.activeGreen,
+                                              borderRadius: BorderRadius.circular(100)
+                                          ),
+                                          child: Icon(CupertinoIcons.plus,color: Colors.white,size: 30.sp,)),
+                                    )
+                                  ],
                                 )
                               ],
                             ),
@@ -139,39 +148,55 @@ class _CartState extends State<Cart> {
       ),
       bottomNavigationBar: Container(
         color: CupertinoColors.extraLightBackgroundGray,
-        height: 240,
+        height: 240.sp,
         width: w,
-        padding: const EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp),
         child: Column(
           children: [
-            const ListTile(
-              dense: true,
-              minVerticalPadding: 0,
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              title: Text('Subtotal',
-                style: TextStyle(
-                    fontSize: 20
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Subtotal',
+                  style: TextStyle(
+                      fontSize: 20.sp
+                  ),
                 ),
-              ),
-              trailing: Text('11,000.00 Br',
-                style: TextStyle(
-                    fontSize: 20
-                ),),
+                Text('11,000.00 Br',
+                  style: TextStyle(
+                      fontSize: 20.sp
+                  ),),
+              ],
             ),
-            const ListTile(
-              minVerticalPadding: 0,
-              dense: true,
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              title: Text('Discount',
-                style: TextStyle(
-                    fontSize: 20
+            SizedBox(height: 10.sp,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Discount',
+                  style: TextStyle(
+                      fontSize: 20.sp
+                  ),
                 ),
-              ),
-              trailing: Text('746.00 Br',
-                style: TextStyle(
-                    fontSize: 20
-                ),),
+                Text('746.00 Br',
+                  style: TextStyle(
+                      fontSize: 20.sp
+                  ),),
+              ],
             ),
+            SizedBox(height: 10.sp,),
+            // ListTile(
+            //   minVerticalPadding: 0,
+            //   dense: true,
+            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16.sp),
+            //   title: Text('Discount',
+            //     style: TextStyle(
+            //         fontSize: 20.sp
+            //     ),
+            //   ),
+            //   trailing: Text('746.00 Br',
+            //     style: TextStyle(
+            //         fontSize: 20.sp
+            //     ),),
+            // ),
             Divider(
               height: 2,
               thickness: 2,
@@ -179,67 +204,97 @@ class _CartState extends State<Cart> {
               endIndent: 20,
             ),
             const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: ElevatedButton(
-                onPressed: (){
-                  MyToast().success(
-                      title: 'ThankYou!!!',
-                      desc: 'You have made an order Successfully!!!',
-                      context: context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: const MaterialStatePropertyAll(Colors.green),
-                  fixedSize: MaterialStatePropertyAll(Size.fromWidth(w)),
-                  padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10,)),
+            GestureDetector(
+              onTap: (){
+                MyToast().success(
+                    title: 'ThankYou!!!',
+                    desc: 'You have made an order Successfully!!!',
+                    context: context);
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(40.sp)
                 ),
-                child: ListTile(
-                  dense: true,
-                  title: const Center(
-                    child: Text('Order for 10,254.00  Br',
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Text('Order for 10,254.00  Br',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22.sp
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        DatePickerModal().datePicker(context: context);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.greenAccent,
+                        radius: 25.sp,
+                        child: Icon(CupertinoIcons.hourglass,size: 40.sp,),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10.sp,),
+            GestureDetector(
+              onTap: (){
+                MyToast().deletion(
+                    context: context,
+                    title: 'Are you want to clear the cart?');
+              },
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: w*0.5,
+                  padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                      borderRadius: BorderRadius.circular(40.sp)
+                  ),
+                  child: Center(
+                    child: Text('Clear',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
+                          color: Colors.white,
+                          fontSize: 18.sp
                       ),
                     ),
                   ),
-                  trailing: GestureDetector(
-                    onTap: (){
-                      DatePickerModal().datePicker(context: context);
-                    },
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.greenAccent,
-                      radius: 25,
-                      child: Icon(CupertinoIcons.hourglass,size: 40,),
-                    ),
-                  ),
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0,top: 5),
-                child: ElevatedButton(
-                  onPressed: (){
-                    MyToast().deletion(
-                        context: context,
-                        title: 'Are you want to clear the cart?');
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: const MaterialStatePropertyAll(Colors.red),
-                    fixedSize: MaterialStatePropertyAll(Size.fromWidth(w*0.5)),
-                    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10,)),
-                  ),
-                  child: const Text('Clear',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(left: 10.0,top: 5),
+            //     child: ElevatedButton(
+            //       onPressed: (){
+            //         MyToast().deletion(
+            //             context: context,
+            //             title: 'Are you want to clear the cart?');
+            //       },
+            //       style: ButtonStyle(
+            //         backgroundColor: const MaterialStatePropertyAll(Colors.red),
+            //         fixedSize: MaterialStatePropertyAll(Size.fromWidth(w*0.5)),
+            //         padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10.sp,)),
+            //       ),
+            //       child: Text('Clear',
+            //         style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 18.sp
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

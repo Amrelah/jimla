@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/login_signup/password_textfield.dart';
 import 'package:jimla/components/login_signup/textfields.dart';
 import 'package:jimla/screens/otp.dart';
@@ -33,16 +34,31 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('ጅምላ|Jimla',
+                Text('ጅምላ|Jimla',
                   style: TextStyle(
                     color: Colors.green,
-                    fontSize: 40
+                    fontSize: 40.sp
                   ),
                 ),
-                const Text('Forgot Password',
+                Text('Forgot Password',
                   style: TextStyle(
                       color: Colors.purple,
-                      fontSize: 25
+                      fontSize: 25.sp
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text('Enter the phone number',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 25.sp
+                  ),
+                ),
+                Text('928****00',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 25.sp
                   ),
                 ),
                 const CustomPhoneTextField(),

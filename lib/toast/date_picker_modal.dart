@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DatePickerModal{
 
@@ -10,11 +11,11 @@ class DatePickerModal{
       barrierColor: Colors.transparent,
       context: context,
       builder: (context) => Container(
-        height: 350,
+        height: 350.sp,
         width: w,
-        decoration: const BoxDecoration(
-            color: CupertinoColors.activeGreen,
-            borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+            color: Colors.green.shade700,
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40),
                 topRight: Radius.circular(40)
             )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/login_signup/password_textfield.dart';
 import 'package:jimla/components/login_signup/textfields.dart';
 import 'package:jimla/screens/forgot_password.dart';
@@ -32,16 +33,16 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('ጅምላ|Jimla',
+                Text('ጅምላ|Jimla',
                   style: TextStyle(
                     color: Colors.green,
-                    fontSize: 40
+                    fontSize: 40.sp
                   ),
                 ),
-                const Text('Login',
+                Text('Login',
                   style: TextStyle(
                     color: Colors.purple,
-                    fontSize: 25
+                    fontSize: 25.sp
                   ),
                 ),
                 const CustomTextField(text: 'User Name',),

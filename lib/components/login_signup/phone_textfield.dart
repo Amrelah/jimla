@@ -1,33 +1,47 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 
-class CustomPhoneTextField extends StatelessWidget {
+class CustomPhoneTextField extends StatefulWidget {
   const CustomPhoneTextField({super.key});
 
   @override
+  State<CustomPhoneTextField> createState() => _CustomPhoneTextFieldState();
+}
+
+class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
+  TextEditingController cont = TextEditingController();
+  String errMessage = '';
+
+  @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        keyboardType: TextInputType.number,
+        onChanged: (val){
+          errMessage = '';
+          if((cont.text.length == 1 && !(val=='7' || val=='9'))){
+            cont.text = '';
+            errMessage = 'The number must start with 7 or 9';
+          }
+          setState(() {
+          });
+        },
+        maxLength: 9,
+        controller: cont,
         decoration: InputDecoration(
-          prefixIcon: const ClipRRect(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
-            child: DropdownMenu(
-              inputDecorationTheme: InputDecorationTheme(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none
-                )
-              ),
-              dropdownMenuEntries: [
-                DropdownMenuEntry(value: '1', label: '251'),
-                DropdownMenuEntry(value: '1', label: '252'),
-                DropdownMenuEntry(value: '1', label: '253'),
-                DropdownMenuEntry(value: '1', label: '254'),
-              ],
-            ),
+          prefixIcon: ClipRRect(
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
+            child: CountryCodePicker(
+              initialSelection: 'ET',
+              dialogSize: Size.fromWidth(w/2),
+            )
           ),
-          label: RichText(text: TextSpan(children: [
-            const WidgetSpan(child: Icon(Icons.phone)),
+          label: RichText(text: const TextSpan(children: [
+            WidgetSpan(child: Icon(Icons.phone)),
             WidgetSpan(child: Text('Phone Number')),
           ])),
           enabledBorder: OutlineInputBorder(
@@ -44,6 +58,13 @@ class CustomPhoneTextField extends StatelessWidget {
                   color: Colors.purple
               )
           ),
+          counter: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(errMessage),
+              Text('${cont.length}/9'),
+            ],
+          )
         ),
       ),
     );
