@@ -1,6 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jimla/components/order/order_detail_tile.dart';
+import 'package:jimla/components/order/order_main_tile.dart';
+import 'package:jimla/components/order/tabs.dart';
 import 'package:jimla/path/path_provider.dart';
 
 class History extends StatefulWidget {
@@ -10,144 +14,171 @@ class History extends StatefulWidget {
   State<History> createState() => _HistoryState();
 }
 
-class _HistoryState extends State<History> {
+class _HistoryState extends State<History>{
+  int currIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Order History'),
-          centerTitle: true,
-          bottom: const TabBar(
-            isScrollable: true,
-              padding: EdgeInsets.only(left: 0),
+          toolbarHeight: 120.sp,
+          title: const TabBar(
+              isScrollable: true,
+              padding: EdgeInsets.only(left: 0,top: 0),
               tabs: [
-                Tab(
-                  icon: Icon(CupertinoIcons.check_mark_circled, color: Colors.green,),
-                  child: Text('Delivered(100)'),
-                ),
-                Tab(
-                  icon: Icon(Icons.delivery_dining, color: Colors.deepOrange,),
-                  child: Text('Pending(10)'),
-                ),
-                Tab(
-                  icon: Icon(CupertinoIcons.timer, color: Colors.purple,),
-                  child: Text('Scheduled(5)'),
-                ),Tab(
-                  icon: Icon(CupertinoIcons.clear_circled, color: Colors.pink,),
-                  child: Text('Cancelled(4)'),
-                ),
+                Tabs(
+                    iconData: CupertinoIcons.check_mark_circled,
+                    name: 'Delivered(100)',
+                    color: Colors.green),
+                Tabs(
+                    iconData: Icons.delivery_dining,
+                    name: 'Pending(10)',
+                    color: Colors.deepOrange),
+                Tabs(
+                    iconData: CupertinoIcons.timer,
+                    name: 'Scheduled(5)',
+                    color: Colors.purple),
+                Tabs(
+                    iconData: CupertinoIcons.clear_circled,
+                    name: 'Cancelled(4)',
+                    color: Colors.pink),
               ]),
         ),
         body: TabBarView(
-          children: [
 
+          children: [
             // delivered
-            SizedBox(
-              height: h,
-              child: ListView.separated(
-                  itemBuilder: (context, index) => ExpandablePanel(
-                    header: const ListTile(
-                    leading: Icon(CupertinoIcons.check_mark_circled, color: Colors.green,),
-                      title: Text('Jan 6 , 2024'),
-                      trailing: Text('1000.00Br'),
-                      focusColor: Colors.green,
-                      splashColor: Colors.green,
-                    ),
-                    expanded: ExpandableButton(
-                      child: Column(
-                          children: [
-                            Image.asset(Images.drawer,height: 500,),
-                            Text("detail"),
-                          ]
-                      ),
-                    ),
-                    collapsed: const SizedBox(),
-                  ),
-                  separatorBuilder: (context, index) => const Divider(height: 2,color: Colors.black,thickness: 2),
-                  itemCount: 20),
+            OrderMainTile(
+                firstText: 'Ordered - Jan 6, 2024',
+                secondText: 'Delivered - Jan 25, 2024',
+                itemQuan: 21,
+                expWidget: SizedBox(
+                  height: h/2,
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 15.sp),
+                    itemCount: 5,
+                    itemBuilder: (context, index) => OrderDetailItemTile(
+                        productName: 'Product name ${index+1}',
+                        category: 'Electronics',
+                        price: '1,000.00 Br',
+                        onPressed: (){},
+                        image: Images.sunflowerP),),
+                ),
+                iconData: CupertinoIcons.check_mark_circled,
+                color: Colors.green,
+                price: '11,000.00',
             ),
 
           //   pending
-            SizedBox(
-              height: h,
-              child: ListView.separated(
-                  itemBuilder: (context, index) => ExpandablePanel(
-                    header: const ListTile(
-                      leading: Icon(Icons.delivery_dining, color: Colors.deepOrange,),
-                      title: Text('Jan 6 , 2024'),
-                      trailing: Text('1000.00Br'),
-                      focusColor: Colors.green,
-                      splashColor: Colors.green,
-                    ),
-                    expanded: ExpandableButton(
-                      child: Column(
+            OrderMainTile(
+              firstText: 'Ordered - Jan 6, 2024',
+              secondText: 'Est.Arrival - Jan 25, 2024',
+              itemQuan: 15,
+              expWidget: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20.sp),
+                      title: Text('Status: \nonArrival',style: TextStyle(
+                        fontSize: 18.sp
+                      ),),
+                      trailing: IntrinsicWidth(
+                        child: Row(
                           children: [
-                            Image.asset(Images.drawer,height: 500,),
-                            Text("detail"),
-                          ]
+                            Icon(Icons.edit,color: Colors.blue,size: 26.sp,),
+                            const SizedBox(width: 10,),
+                            Icon(Icons.delete,color: Colors.red,size: 26.sp,),
+                          ],
+                        ),
                       ),
                     ),
-                    collapsed: const SizedBox(),
-                  ),
-                  separatorBuilder: (context, index) => const Divider(height: 2,color: Colors.black,thickness: 2),
-                  itemCount: 20),
+                    SizedBox(
+                      height: h/2,
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 15.sp),
+                        itemCount: 5,
+                        itemBuilder: (context, index) => OrderDetailItemTile(
+                            productName: 'Product name ${index+1}',
+                            category: 'Electronics',
+                            price: '999.99 Br',
+                            onPressed: (){},
+                            image: Images.sunflowerP),),
+                    ),
+                  ],
+                ),
+              ),
+              iconData: Icons.delivery_dining,
+              color: Colors.deepOrange,
+              price: '12,750.00',
             ),
 
           //   scheduled
-            SizedBox(
-              height: h,
-              child: ListView.separated(
-                  itemBuilder: (context, index) => ExpandablePanel(
-                    header: const ListTile(
-                      leading: Icon(CupertinoIcons.timer, color: Colors.purple,),
-                      title: Text('Jan 6 , 2024'),
-                      trailing: Text('1000.00Br'),
-                      focusColor: Colors.green,
-                      splashColor: Colors.green,
-                    ),
-                    expanded: ExpandableButton(
-                      child: Column(
+            OrderMainTile(
+              firstText: 'Ordered - Jan 6, 2024',
+              secondText: 'Scheduled - Jan 25, 2024',
+              itemQuan: 25,
+              expWidget: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20.sp),
+                      title: Text('Status: \nonArrival',style: TextStyle(
+                          fontSize: 18.sp
+                      ),),
+                      trailing: IntrinsicWidth(
+                        child: Row(
                           children: [
-                            Image.asset(Images.drawer,height: 500,),
-                            Text("detail"),
-                          ]
+                            Icon(Icons.edit,color: Colors.blue,size: 26.sp,),
+                            const SizedBox(width: 10,),
+                            Icon(Icons.delete,color: Colors.red,size: 26.sp,),
+                          ],
+                        ),
                       ),
                     ),
-                    collapsed: const SizedBox(),
-                  ),
-                  separatorBuilder: (context, index) => const Divider(height: 2,color: Colors.black,thickness: 2),
-                  itemCount: 20),
+                    SizedBox(
+                      height: h/2,
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 15.sp),
+                        itemCount: 5,
+                        itemBuilder: (context, index) => OrderDetailItemTile(
+                            productName: 'Product name ${index+1}',
+                            category: 'Electronics',
+                            price: '999.99 Br',
+                            onPressed: (){},
+                            image: Images.sunflowerP),),
+                    ),
+                  ],
+                ),
+              ),
+              iconData: CupertinoIcons.timer,
+              color: Colors.purple,
+              price: '10,750.00',
             ),
 
           //   cancelled
-            SizedBox(
-              height: h,
-              child: ListView.separated(
-                  itemBuilder: (context, index) => ExpandablePanel(
-                    header: const ListTile(
-                      leading: Icon(CupertinoIcons.clear_circled, color: Colors.red,),
-                      title: Text('Jan 6 , 2024'),
-                      trailing: Text('1000.00Br'),
-                      focusColor: Colors.green,
-                      splashColor: Colors.green,
-                    ),
-                    expanded: ExpandableButton(
-                      child: Column(
-                          children: [
-                            Image.asset(Images.drawer,height: 500,),
-                            Text("detail"),
-                          ]
-                      ),
-                    ),
-                    collapsed: const SizedBox(),
-                  ),
-                  separatorBuilder: (context, index) => const Divider(height: 2,color: Colors.black,thickness: 2),
-                  itemCount: 20),
-            )
+            OrderMainTile(
+              firstText: 'Ordered - Jan 6, 2024',
+              secondText: 'Canceled - Jan 25, 2024',
+              itemQuan: 10,
+              expWidget: SizedBox(
+                height: h/2,
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 15.sp),
+                  itemCount: 5,
+                  itemBuilder: (context, index) => OrderDetailItemTile(
+                      productName: 'Product name ${index+1}',
+                      category: 'Electronics',
+                      price: '999.99 Br',
+                      onPressed: (){},
+                      image: Images.sunflowerP),),
+              ),
+              iconData: CupertinoIcons.clear_circled,
+              color: Colors.red,
+              price: '500.00',
+            ),
           ],
         ),
       ),

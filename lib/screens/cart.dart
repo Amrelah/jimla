@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jimla/components/cart/cart_item_tile.dart';
 import 'package:jimla/toast/date_picker_modal.dart';
 import 'package:jimla/toast/toast.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 import '../path/path_provider.dart';
 
@@ -22,135 +21,23 @@ class _CartState extends State<Cart> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Cart'),
-        centerTitle: true,
-      ),
       body: SizedBox(
         height: h,
         child: ListView.builder(
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Material(
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          elevation: 10,
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                              padding: const EdgeInsets.all(10),
-                              width: w*0.3,
-                              height: w*0.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)
-                              ),
-                              child: Image.asset(Images.drawer,)),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: w*0.7-40,
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(right: 5,left: 16),
-                              title: Text('Product Name ${index+1}'),
-                              subtitle: const Text('#Electronics'),
-                              trailing: Column(
-                                children: [
-                                  IconButton(
-                                      onPressed: (){},
-                                      icon: const Icon(Icons.close)),
-                                  const Expanded(child: SizedBox())
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            width: w*0.7-40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('100.00 Br',
-                                  style: TextStyle(
-
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: (){
-                                        setState(() {
-                                          count--;
-                                        });
-                                      },
-                                      child: Container(
-                                          padding: EdgeInsets.all(5.sp),
-                                          decoration: BoxDecoration(
-                                              color: CupertinoColors.activeGreen,
-                                              borderRadius: BorderRadius.circular(100)
-                                          ),
-                                          child: Icon(CupertinoIcons.minus,color: Colors.white,size: 30.sp,)),
-                                    ),
-                                    NumberPicker(
-                                        minValue: 1,
-                                        maxValue: 100,
-                                        value: count,
-                                        itemWidth: 50.sp,
-                                        itemHeight: 40.sp,
-                                        textStyle: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 15.sp
-                                        ),
-                                        selectedTextStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 25.sp
-                                        ),
-                                        onChanged: (val){
-                                          setState(() {
-                                            count = val;
-                                          });
-                                        }),
-                                    GestureDetector(
-                                      onTap: (){
-                                        setState(() {
-                                          count++;
-                                        });
-                                      },
-                                      child: Container(
-                                          padding: EdgeInsets.all(5.sp),
-                                          decoration: BoxDecoration(
-                                              color: CupertinoColors.activeGreen,
-                                              borderRadius: BorderRadius.circular(100)
-                                          ),
-                                          child: Icon(CupertinoIcons.plus,color: Colors.white,size: 30.sp,)),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return CartItemTile(
+                  productName: 'Product Name ${index+1}',
+                  category: 'Electronics',
+                  price: '100.00 Br',
+                  image: Images.sunflowerP,);
             },
           itemCount: 30,),
       ),
       bottomNavigationBar: Container(
         color: CupertinoColors.extraLightBackgroundGray,
-        height: 240.sp,
+        height: 290.sp,
         width: w,
-        padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp),
+        padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp,bottom: 50.sp),
         child: Column(
           children: [
             Row(
@@ -183,20 +70,6 @@ class _CartState extends State<Cart> {
               ],
             ),
             SizedBox(height: 10.sp,),
-            // ListTile(
-            //   minVerticalPadding: 0,
-            //   dense: true,
-            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16.sp),
-            //   title: Text('Discount',
-            //     style: TextStyle(
-            //         fontSize: 20.sp
-            //     ),
-            //   ),
-            //   trailing: Text('746.00 Br',
-            //     style: TextStyle(
-            //         fontSize: 20.sp
-            //     ),),
-            // ),
             Divider(
               height: 2,
               thickness: 2,
@@ -271,30 +144,6 @@ class _CartState extends State<Cart> {
                 ),
               ),
             ),
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(left: 10.0,top: 5),
-            //     child: ElevatedButton(
-            //       onPressed: (){
-            //         MyToast().deletion(
-            //             context: context,
-            //             title: 'Are you want to clear the cart?');
-            //       },
-            //       style: ButtonStyle(
-            //         backgroundColor: const MaterialStatePropertyAll(Colors.red),
-            //         fixedSize: MaterialStatePropertyAll(Size.fromWidth(w*0.5)),
-            //         padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10.sp,)),
-            //       ),
-            //       child: Text('Clear',
-            //         style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 18.sp
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

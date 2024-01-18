@@ -1,28 +1,28 @@
 import 'package:jimla/screens/cart.dart';
 import 'package:jimla/screens/favorite.dart';
 import 'package:jimla/screens/histry.dart';
-import 'package:jimla/screens/home.dart';
+import 'package:jimla/screens/home_page.dart';
 import 'package:jimla/screens/profile.dart';
 
 List screens = [
   {
-    'name' : const Home(),
-    'id' : 0,
+    'name' : const HomePage(),
+    'title' : 'ጅምላ|Jimla',
   },
   {
     'name' : const Favorite(),
-    'id' : 1,
+    'title' : 'Favorite',
   },
   {
     'name' : const Cart(),
-    'id' : 2,
+    'title' : 'My Cart',
   },
   {
     'name' : const History(),
-    'id' : 3,
+    'title' : 'Order History',
   },
   {
     'name' : const Profile(),
-    'id' : 4,
+    'title' : 'Profile',
   },
 ];
