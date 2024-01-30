@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -27,7 +28,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                   width: 4,
-                  color: Colors.purple
+                  color: CupertinoColors.activeGreen
               )
           ),
         ),

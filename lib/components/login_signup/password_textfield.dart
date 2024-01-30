@@ -40,7 +40,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                   width: 4,
-                  color: Colors.purple
+                  color: CupertinoColors.activeGreen
               )
           ),
         ),

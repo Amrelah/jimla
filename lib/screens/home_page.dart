@@ -121,12 +121,6 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 25.sp,
                       fontWeight: FontWeight.w600
                   ),),
-                Text('See all',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18.sp
-                  ),
-                )
               ],
             ),
           ),

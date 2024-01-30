@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/cart/cart_item_tile.dart';
-import 'package:jimla/toast/date_picker_modal.dart';
+import 'package:jimla/components/cart/date_picker_modal.dart';
 import 'package:jimla/toast/toast.dart';
 
 import '../path/path_provider.dart';

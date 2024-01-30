@@ -63,11 +63,15 @@ class _ProfileState extends State<Profile> {
                 color: Colors.green,
                 text: '+251 928 667 400'),
             const ProfileTiles(
+                iconData: CupertinoIcons.globe,
+                color: Colors.blue,
+                text: 'English'),
+            const ProfileTiles(
                 iconData: CupertinoIcons.location_solid,
                 color: Colors.red,
                 text: 'Addis Ababa, Jemo1'),
             SizedBox(
-              height: h/2,
+              height: h/3,
               width: w,
               child: FlutterMap(
                 options: const MapOptions(

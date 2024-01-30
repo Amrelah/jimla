@@ -1,4 +1,3 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +5,8 @@ import 'package:jimla/components/order/order_detail_tile.dart';
 import 'package:jimla/components/order/order_main_tile.dart';
 import 'package:jimla/components/order/tabs.dart';
 import 'package:jimla/path/path_provider.dart';
+import 'package:jimla/toast/toast.dart';
+
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -15,7 +16,6 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History>{
-  int currIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,13 @@ class _HistoryState extends State<History>{
                           children: [
                             Icon(Icons.edit,color: Colors.blue,size: 26.sp,),
                             const SizedBox(width: 10,),
-                            Icon(Icons.delete,color: Colors.red,size: 26.sp,),
+                            GestureDetector(
+                                onTap: ()async{
+                                  bool delete = await MyToast().deletePopUp(context, 'Are you want to delete this order?');
+                                  print('val = $delete');
+                                  // MyToast().deletion(context: context, title: "Are you want to delete this order?");
+                                },
+                                child: Icon(Icons.delete,color: Colors.red,size: 26.sp,)),
                           ],
                         ),
                       ),

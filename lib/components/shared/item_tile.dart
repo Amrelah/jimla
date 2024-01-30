@@ -31,8 +31,8 @@ class ItemTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.sp),
                   child: Container(
                       padding: EdgeInsets.all(10.sp),
-                      width: (w*0.3).sp,
-                      height: (w*0.3).spMax,
+                      width: (w*0.3),
+                      height: (w*0.3),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)
@@ -57,14 +57,9 @@ class ItemTile extends StatelessWidget {
                             fontSize: 18.sp,
                             overflow: TextOverflow.ellipsis
                         ),),
-                      trailing: Column(
-                        children: [
-                          IconButton(
-                              onPressed: (){onPressed;},
-                              icon: Icon(iconData,size: 25.sp,color: Colors.red,)),
-                          const Expanded(child: SizedBox())
-                        ],
-                      ),
+                      trailing: IconButton(
+                          onPressed: (){onPressed;},
+                          icon: Icon(iconData,size: 25.sp,color: Colors.red,))
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),

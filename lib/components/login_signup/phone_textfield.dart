@@ -55,7 +55,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
               borderRadius: BorderRadius.circular(30),
               borderSide: const BorderSide(
                   width: 4,
-                  color: Colors.purple
+                  color: CupertinoColors.activeGreen
               )
           ),
           counter: Row(
