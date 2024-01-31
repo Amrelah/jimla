@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchTextField extends StatefulWidget {
-  const CustomSearchTextField({super.key,});
+  final FocusNode node;
+  const CustomSearchTextField({super.key, required this.node,});
 
   @override
   State<CustomSearchTextField> createState() => _CustomSearchTextFieldState();
@@ -14,6 +15,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        focusNode: widget.node,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 16.sp

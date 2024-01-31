@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DatePickerModal{
 
+  DateTime date = DateTime.now();
   Future datePicker({required BuildContext context}){
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -38,8 +39,10 @@ class DatePickerModal{
                   minimumDate: DateTime.now(),
                   initialDateTime: DateTime.now(),
                   backgroundColor: Colors.transparent,
-                  onDateTimeChanged: (val){},
-              
+                  onDateTimeChanged: (val){
+                    date = val;
+                  },
+
                 ),
               ),
             ),

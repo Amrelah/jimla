@@ -6,16 +6,16 @@ import 'package:jimla/screens/profile.dart';
 
 List screens = [
   {
-    'name' : const HomePage(),
-    'title' : 'ጅምላ|Jimla',
-  },
-  {
     'name' : const Favorite(),
     'title' : 'Favorite',
   },
   {
     'name' : const Cart(),
     'title' : 'My Cart',
+  },
+  {
+    'name' : const HomePage(),
+    'title' : 'ጅምላ|Jimla',
   },
   {
     'name' : const History(),

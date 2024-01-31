@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:jimla/components/cart/cart_item_tile.dart';
 import 'package:jimla/components/cart/date_picker_modal.dart';
 import 'package:jimla/toast/toast.dart';
@@ -35,7 +36,7 @@ class _CartState extends State<Cart> {
       ),
       bottomNavigationBar: Container(
         color: CupertinoColors.extraLightBackgroundGray,
-        height: 290.sp,
+        height: 300.sp,
         width: w,
         padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp,bottom: 50.sp),
         child: Column(
@@ -94,11 +95,21 @@ class _CartState extends State<Cart> {
                   children: [
                     Expanded(
                       child: Center(
-                        child: Text('Order for 10,254.00  Br',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22.sp
-                          ),
+                        child: Column(
+                          children: [
+                            Text('Order for 10,254.00  Br',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22.sp
+                              ),
+                            ),
+                            Text('⌚${DateFormat('EEE, M/d/y hh:mm').format(DatePickerModal().date)}',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.sp
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -120,9 +131,7 @@ class _CartState extends State<Cart> {
             SizedBox(height: 10.sp,),
             GestureDetector(
               onTap: (){
-                MyToast().deletion(
-                    context: context,
-                    title: 'Are you want to clear the cart?');
+                MyToast().deletePopUp( context, 'Are you want to clear the cart?');
               },
               child: Align(
                 alignment: Alignment.centerLeft,

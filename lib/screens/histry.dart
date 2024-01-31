@@ -93,8 +93,6 @@ class _HistoryState extends State<History>{
                             GestureDetector(
                                 onTap: ()async{
                                   bool delete = await MyToast().deletePopUp(context, 'Are you want to delete this order?');
-                                  print('val = $delete');
-                                  // MyToast().deletion(context: context, title: "Are you want to delete this order?");
                                 },
                                 child: Icon(Icons.delete,color: Colors.red,size: 26.sp,)),
                           ],

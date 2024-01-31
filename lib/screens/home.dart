@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int currIndex = 0;
+  int currIndex = 2;
   late int lastBackButtonPressTime;
   @override
   void initState() {
@@ -28,9 +28,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) {
-        if(currIndex != 0){
+        if(currIndex != 2){
           setState(() {
-            currIndex = 0;
+            currIndex = 2;
           });
           return;
         }
@@ -62,11 +62,10 @@ class _HomeState extends State<Home> {
         body: screens[currIndex]['name'],
         bottomNavigationBar: CurvedNavigationBar(
           color: Colors.green,
-          backgroundColor: Colors.white.withOpacity(0),
+          backgroundColor: Colors.white.withOpacity(0.4),
           height: 50.sp>75? 75 : 50.sp,
           animationCurve: Curves.easeInExpo,
           items: [
-            const BotNavIcon(iconData: Icons.store_mall_directory_rounded),
             const BotNavIcon(iconData: Icons.favorite),
             badges.Badge(
               position: badges.BadgePosition.topEnd(
@@ -87,6 +86,7 @@ class _HomeState extends State<Home> {
                 ),),
               ),
               child: const BotNavIcon(iconData: Icons.shopping_cart)),
+            const BotNavIcon(iconData: Icons.store_mall_directory_rounded),
             const BotNavIcon(iconData: Icons.history),
             const BotNavIcon(iconData: Icons.person),
           ],
@@ -100,16 +100,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  // void _onBackButtonPressed() {
-  //   int currentTime = DateTime.now().millisecondsSinceEpoch;
-  //
-  //   if (currentTime - lastBackButtonPressTime > 2000) {
-  //     lastBackButtonPressTime = currentTime;
-  //
-  //     MyToast().warning(context: context, title: 'Exit', desc: 'Double tap to exit');
-  //     return false;
-  //   } else {
-  //     pop =  true;
-  //   }
-  // }
 }

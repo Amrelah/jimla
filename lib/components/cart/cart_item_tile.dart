@@ -28,6 +28,9 @@ class _CartItemTileState extends State<CartItemTile> {
           children: [
             GestureDetector(
               onTap: (){
+                if(count<=1){
+                  return;
+                }
                 setState(() {
                   count--;
                 });
@@ -62,6 +65,9 @@ class _CartItemTileState extends State<CartItemTile> {
                 }),
             GestureDetector(
               onTap: (){
+                if(count>=100){
+                  return;
+                }
                 setState(() {
                   count++;
                 });
