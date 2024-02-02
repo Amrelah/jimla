@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jimla/components/home_page/card_swiper.dart';
 import 'package:jimla/components/home_page/categories.dart';
-import 'package:jimla/components/home_page/product_item.dart';
-import 'package:jimla/shimmer/home/swiper.dart';
+import 'package:jimla/shimmer/home/category_shimmer.dart';
+import 'package:jimla/shimmer/home/product_shimmer.dart';
+import 'package:jimla/shimmer/home/swiper_shimmer.dart';
+import '../components/home_page/product_item.dart';
 import '../components/home_page/search_textfield.dart';
-import '../path/path_provider.dart';
-import 'detail.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,10 +18,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   FocusNode node = FocusNode();
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 1),() {
+      setState(() {
+        isLoading = false;
+      });
+    },);
+  }
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return SizedBox(
       height: h,
       child: Column(
@@ -34,10 +44,10 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                     flex: 2,
-                    child: SwiperShimmer(),
-              ),
+                    child: isLoading? const SwiperShimmer() : const HomeCardSwiper(),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
@@ -51,11 +61,12 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const Categories(),
+                isLoading? const CategoryShimmer() : const Categories(),
                 SizedBox(height: 10.sp,),
                 Expanded(
                   flex: 8,
-                  child: GridView.builder(
+                  child: isLoading? const ProductShimmer() :
+                  GridView.builder(
                     padding: EdgeInsets.only(right: 10.sp,left: 10.sp,bottom: 45.sp),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

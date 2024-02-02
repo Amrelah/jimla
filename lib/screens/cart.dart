@@ -34,126 +34,128 @@ class _CartState extends State<Cart> {
             },
           itemCount: 30,),
       ),
-      bottomNavigationBar: Container(
-        color: CupertinoColors.extraLightBackgroundGray,
-        height: 300.sp,
-        width: w,
-        padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp,bottom: 50.sp),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Subtotal',
-                  style: TextStyle(
-                      fontSize: 20.sp
+      bottomNavigationBar: IntrinsicHeight(
+        child: Container(
+          color: CupertinoColors.extraLightBackgroundGray,
+          width: w,
+          padding: EdgeInsets.only(left: 20,right: 20,top: 20.sp,bottom: 50.sp),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Subtotal',
+                    style: TextStyle(
+                        fontSize: 20.sp
+                    ),
+                  ),
+                  Text('11,000.00 Br',
+                    style: TextStyle(
+                        fontSize: 20.sp
+                    ),),
+                ],
+              ),
+              SizedBox(height: 10.sp,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Discount',
+                    style: TextStyle(
+                        fontSize: 20.sp
+                    ),
+                  ),
+                  Text('746.00 Br',
+                    style: TextStyle(
+                        fontSize: 20.sp
+                    ),),
+                ],
+              ),
+              SizedBox(height: 10.sp,),
+              Divider(
+                height: 2,
+                thickness: 2,
+                color: Colors.green.shade200,
+                endIndent: 20,
+              ),
+              const SizedBox(height: 10,),
+              GestureDetector(
+                onTap: (){
+                  MyToast().success(
+                      title: 'ThankYou!!!',
+                      desc: 'You have made an order Successfully!!!',
+                      context: context);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(40.sp)
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text('Order for 10,254.00  Br',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22.sp
+                                ),
+                              ),
+                              Text('⌚${DateFormat('EEE, M/d/y hh:mm').format(DatePickerModal().date)}',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.sp
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          DatePickerModal().datePicker(context: context);
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.greenAccent,
+                          radius: 25.sp,
+                          child: Icon(CupertinoIcons.hourglass,size: 40.sp,),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Text('11,000.00 Br',
-                  style: TextStyle(
-                      fontSize: 20.sp
-                  ),),
-              ],
-            ),
-            SizedBox(height: 10.sp,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Discount',
-                  style: TextStyle(
-                      fontSize: 20.sp
-                  ),
-                ),
-                Text('746.00 Br',
-                  style: TextStyle(
-                      fontSize: 20.sp
-                  ),),
-              ],
-            ),
-            SizedBox(height: 10.sp,),
-            Divider(
-              height: 2,
-              thickness: 2,
-              color: Colors.green.shade200,
-              endIndent: 20,
-            ),
-            const SizedBox(height: 10,),
-            GestureDetector(
-              onTap: (){
-                MyToast().success(
-                    title: 'ThankYou!!!',
-                    desc: 'You have made an order Successfully!!!',
-                    context: context);
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(40.sp)
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text('Order for 10,254.00  Br',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22.sp
-                              ),
-                            ),
-                            Text('⌚${DateFormat('EEE, M/d/y hh:mm').format(DatePickerModal().date)}',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.sp
-                              ),
-                            ),
-                          ],
+              ),
+              SizedBox(height: 10.sp,),
+              GestureDetector(
+                onTap: (){
+                  MyToast().deletePopUp( context, 'Are you want to clear the cart?');
+                },
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: w*0.5,
+                    padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                        borderRadius: BorderRadius.circular(40.sp)
+                    ),
+                    child: Center(
+                      child: Text('Clear',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.sp
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: (){
-                        DatePickerModal().datePicker(context: context);
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.greenAccent,
-                        radius: 25.sp,
-                        child: Icon(CupertinoIcons.hourglass,size: 40.sp,),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 10.sp,),
-            GestureDetector(
-              onTap: (){
-                MyToast().deletePopUp( context, 'Are you want to clear the cart?');
-              },
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  width: w*0.5,
-                  padding: EdgeInsets.symmetric(vertical: 8.sp,horizontal: 20.sp),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                      borderRadius: BorderRadius.circular(40.sp)
-                  ),
-                  child: Center(
-                    child: Text('Clear',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.sp
-                      ),
-                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 10.sp,),
+            ],
+          ),
         ),
       ),
     );

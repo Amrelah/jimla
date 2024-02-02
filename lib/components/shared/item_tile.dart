@@ -32,7 +32,7 @@ class ItemTile extends StatelessWidget {
                   child: Container(
                       padding: EdgeInsets.all(10.sp),
                       width: (w*0.3),
-                      height: (w*0.3),
+                      // height: (w*0.3),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)
@@ -44,7 +44,10 @@ class ItemTile extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      contentPadding: EdgeInsets.only(right: 5.sp,left: 16.sp),
+                      contentPadding: EdgeInsets.only(right: 5.sp,left: 16.sp,bottom: 0),
+                      dense: true,
+                      style: ListTileStyle.drawer,
+                      visualDensity: const VisualDensity(vertical: -4),
                       minVerticalPadding: 0,
                       title: Text(productName,
                         style: TextStyle(
@@ -65,6 +68,7 @@ class ItemTile extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(price,
                             style: TextStyle(

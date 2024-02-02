@@ -21,6 +21,7 @@ class FavItemTile extends StatelessWidget {
         onTap: (){},
         child: Container(
             padding: EdgeInsets.all(7.sp),
+            margin: EdgeInsets.only(top: 40.sp,bottom: 10.sp),
             decoration: BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(100)
