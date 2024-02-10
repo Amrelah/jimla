@@ -7,6 +7,7 @@ import 'package:jimla/components/cart/date_picker_modal.dart';
 import 'package:jimla/toast/toast.dart';
 
 import '../path/path_provider.dart';
+import '../shimmer/fav_and_cart/favorite_shimmer.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -17,6 +18,17 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   int count = 1;
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 1),() {
+      setState(() {
+        isLoading = false;
+      });
+    },);
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -24,7 +36,7 @@ class _CartState extends State<Cart> {
     return Scaffold(
       body: SizedBox(
         height: h,
-        child: ListView.builder(
+        child: isLoading? const FavoriteCartShimmer():  ListView.builder(
             itemBuilder: (context, index) {
               return CartItemTile(
                   productName: 'Product Name ${index+1}',
@@ -34,7 +46,7 @@ class _CartState extends State<Cart> {
             },
           itemCount: 30,),
       ),
-      bottomNavigationBar: IntrinsicHeight(
+      bottomNavigationBar: isLoading? const SizedBox() : IntrinsicHeight(
         child: Container(
           color: CupertinoColors.extraLightBackgroundGray,
           width: w,

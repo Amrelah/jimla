@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/login_signup/password_textfield.dart';
-import 'package:jimla/components/login_signup/textfields.dart';
 import 'package:jimla/screens/forgot_password.dart';
 import 'package:jimla/screens/signup.dart';
-
+import '../components/login_signup/phone_textfield.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -45,7 +44,7 @@ class _LoginState extends State<Login> {
                     fontSize: 25.sp
                   ),
                 ),
-                const CustomTextField(text: 'User Name',),
+                const CustomPhoneTextField(),
                 const CustomPasswordTextField(text: 'Password',),
                 Align(
                   alignment: Alignment.centerLeft,

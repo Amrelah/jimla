@@ -40,7 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     fontSize: 40.sp
                   ),
                 ),
-                Text('Forgot Password',
+                Text('Password Recovery',
                   style: TextStyle(
                       color: Colors.purple,
                       fontSize: 25.sp
@@ -49,16 +49,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text('Enter the phone number',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 25.sp
-                  ),
-                ),
-                Text('928****00',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 25.sp
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0.sp),
+                  child: Text('Please enter the phone number to recovery the password',textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22.sp
+                    ),
                   ),
                 ),
                 const CustomPhoneTextField(),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
@@ -41,14 +42,7 @@ class _OtpState extends State<Otp> {
             ),
           ),
           const SizedBox(height: 20,),
-          Text('Enter the code sent to the number',
-            style: TextStyle(
-              fontSize: 25.sp,
-              fontWeight: FontWeight.w700,
-              color: Colors.green,
-            ),
-          ),
-          Text('+251-928-66-74-00',
+          Text('Enter the code sent to your number',
             style: TextStyle(
               fontSize: 25.sp,
               fontWeight: FontWeight.w700,
@@ -59,6 +53,8 @@ class _OtpState extends State<Otp> {
           Pinput(
             keyboardType: TextInputType.number,
             defaultPinTheme: defaultTheme,
+            onCompleted: (val){
+            },
           ),
           const SizedBox(height: 10,),
           Text('Didn\'t receive code? ',

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jimla/components/profile/tiles.dart';
+import 'package:jimla/path/path_provider.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,9 +14,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  final controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..loadRequest(Uri.parse('https://flutter.dev'));
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -46,13 +43,33 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.green,
                         child: CircleAvatar(
                           radius: 80.sp,
-                          child: const SizedBox(),
+                          child: Image.asset(Images.user,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ],
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(right: 15.0.sp),
+                child: IntrinsicWidth(
+                  child: Row(
+                    children: [
+                      Text('Edit Profile',
+                        style: TextStyle(
+                          fontSize: 18.sp
+                        ),
+                      ),
+                      Icon(Icons.edit,size: 20.sp,color: Colors.blue,)
+                    ],
+                  ),
+                ),
+              ),
             ),
             const ProfileTiles(
                 iconData: CupertinoIcons.person_circle,
@@ -115,10 +132,21 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const ProfileTiles(
+                iconData: Icons.key_rounded,
+                color: Colors.orangeAccent,
+                text: 'Change Password'),
+            const ProfileTiles(
+                iconData: Icons.settings,
+                color: Colors.black87,
+                text: 'Settings'),
+            const ProfileTiles(
+                iconData: Icons.info_outline_rounded,
+                color: Colors.blue,
+                text: 'Terms and Conditions'),
+            const ProfileTiles(
                 iconData: Icons.logout,
                 color: Colors.red,
                 text: 'Logout'),
-            SizedBox(height: 50.sp,)
           ],
         ),
       ),

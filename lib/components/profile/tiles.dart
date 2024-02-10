@@ -12,7 +12,7 @@ class ProfileTiles extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: ListTile(
-        leading: Icon(iconData, color: color,size: 45.sp,),
+        leading: Icon(iconData, color: color,size: 40.sp,),
         title: Text(text,
           style: TextStyle(
             fontSize: 25.sp,

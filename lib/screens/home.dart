@@ -8,6 +8,8 @@ import 'package:jimla/data/screen_data.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:jimla/toast/toast.dart';
 
+import '../path/path_provider.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -88,7 +90,13 @@ class _HomeState extends State<Home> {
               child: const BotNavIcon(iconData: Icons.shopping_cart)),
             const BotNavIcon(iconData: Icons.store_mall_directory_rounded),
             const BotNavIcon(iconData: Icons.history),
-            const BotNavIcon(iconData: Icons.person),
+            CircleAvatar(
+              radius: 20.sp,
+              child: Image.asset(Images.user,
+                fit: BoxFit.fill,
+              ),
+            ),
+            // const BotNavIcon(iconData: Icons.person),
           ],
           onTap: (ind){
             setState(() {

@@ -37,7 +37,7 @@ class ItemTile extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20.sp)
                       ),
-                      child: Image.asset(image,fit: BoxFit.fitHeight,)),
+                      child: Image.asset(image,fit: BoxFit.fill,)),
                 ),
               ),
               Expanded(

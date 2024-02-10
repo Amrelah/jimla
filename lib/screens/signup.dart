@@ -50,6 +50,14 @@ class _SignupState extends State<Signup> {
                     const CustomPhoneTextField(),
                     const CustomPasswordTextField(text: 'Password',),
                     const CustomPasswordTextField(text: 'Re-Enter Password',),
+                    Row(
+                      children: [
+                        Checkbox(
+                            value: false,
+                            onChanged: (val){}),
+                        const Text('I agree to the Terms and Conditions')
+                      ],
+                    ),
                     ElevatedButton(
                       onPressed: (){
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login(),));
